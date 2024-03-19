@@ -5,7 +5,7 @@ import Student.PartTimeStudent;
 
 public class Project {
     private String namePro;
-    private Double budgetPro;
+    private double budgetPro;
     private Lecturer Lecturer;
     private Object[] Members;
     private final int MAXMEMBERS  = 10;
@@ -28,20 +28,30 @@ public class Project {
         return Lecturer;
     }
     public boolean addMember(Object newMember){
-        if (!isNotFull()){
+        if (!isNotFull())
             return false;
-            if (!(newMember instanceof PartTimeStudent)){
-                Members[memberCount++] = newMember;
-                if (newMember instanceof FullTimeStudent){
-                    ((FullTimeStudent)newMember).setProject(this);
-                }
-                else{
-
-                }
+        if (!(newMember instanceof PartTimeStudent)){
+            Members[memberCount++] = newMember;
+            if (newMember instanceof FullTimeStudent){
+                ((FullTimeStudent)newMember).setProject(this);
             }
-        }
+            else{
+                ((Lecturer)newMember).getJoinedProject()[((Lecturer)newMember).getProjectCount()] = this;
+                ((Lecturer)newMember).setProjectCount(((Lecturer)newMember).getProjectCount() + 1);
+            }
+            return true;
+            }
+        return false;
+
     }
     public boolean isNotFull(){
         return memberCount < MAXMEMBERS;
+    }
+    public void displayMembers(){
+        System.out.println("Leader: " + Lecturer);
+
+        for (int i = 0 ; i < memberCount; i++){
+            System.out.printf("Member #%d: " + Members[i] + "\n", i+1);
+        }
     }
 }

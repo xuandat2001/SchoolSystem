@@ -5,10 +5,17 @@ public class FullTimeStudent extends student{
     private Project joinedProject;
     public FullTimeStudent(){
         super();
+        this.joinedProject = null;
     }
 
     public FullTimeStudent(String nameStu, String major, String idStu) {
         super(nameStu, major, idStu);
+        this.joinedProject = null;
+    }
+
+    public FullTimeStudent(String nameStu, String major, String idStu, Project project) {
+        super(nameStu, major, idStu);
+        this.joinedProject = project;
     }
 
     public void setProject(Project joinedProject) {
